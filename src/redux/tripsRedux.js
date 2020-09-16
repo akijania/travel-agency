@@ -19,7 +19,7 @@ export const getFilteredTrips = ({trips, filters}) => {
 
   // DONE - filter by tags
   if(filters.tags){
-    filters.tags.forEach(tag => output = output.filter(trip => new RegExp(tag, 'i').test(trip.tags)));
+    filters.tags.every(tag => output = output.filter(trip => new RegExp(tag, 'i').test(trip.tags)));
   }
 
   // DONE - sort by cost descending (most expensive goes first)
