@@ -41,7 +41,7 @@ export default function reducer(statePart = [], action = {}) {
     case REMOVE_TAG: 
       return{
         ...statePart,
-        tags: statePart.tags.filter(obj=>obj.tag !== action.payload.tag),
+        tags: statePart.tags.filter(tag=>tag !== action.payload),
       };
 
 
