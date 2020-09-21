@@ -6,11 +6,11 @@ import pricing from '../../../data/pricing.json';
 import OrderOption from '../OrderOption/OrderOption';
 
 
-const OrderForm = ({tripCost, options}) => (
+const OrderForm = ({tripCost, options, setOrderOption}) => (
   <Row>
     {pricing.map(pricingData => (
       <Col key={pricingData.id} md={4}>
-        <OrderOption {...pricingData} />
+        <OrderOption {...pricingData} currentValue={options[pricingData.id]} setOrderOption={setOrderOption} />
       </Col>
     ))} 
     <Col xs={12}>
@@ -21,5 +21,6 @@ const OrderForm = ({tripCost, options}) => (
 OrderForm.propTypes = {
   tripCost: PropTypes.string,
   options: PropTypes.any,
+  setOrderOption: PropTypes.func,
 };
 export default OrderForm;
