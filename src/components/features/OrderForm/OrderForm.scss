@@ -1,1 +1,7 @@
 @import '../../../styles/settings.scss';
+
+.component {
+    padding: ($base-size / 2);
+    margin-bottom: ($base-size * 2);
+    border-bottom: 1px solid $color-background;
+  }
