@@ -54,7 +54,7 @@ describe('Component TripSummary', () => {
     expect(component.find('.tags span').at(2).text()).toEqual(expectedTags[2]);
     
   });  
-  it('should render correct tags', () => {
+  it('should not render div when props tags is false ', () => {
     const expectedId = 'abc';
     const expectedImageSrc = 'image.jpg';
     const expectedName = 'image';
