@@ -54,7 +54,7 @@ describe('Component TripSummary', () => {
     expect(component.find('.tags span').at(2).text()).toEqual(expectedTags[2]);
     
   });  
-  it('should not render div when props tags is false ', () => {
+  it('should not render div when props tags array is empty ', () => {
     const expectedId = 'abc';
     const expectedImageSrc = 'image.jpg';
     const expectedName = 'image';
@@ -62,6 +62,16 @@ describe('Component TripSummary', () => {
     const expectedCost= '$500.00';
     const expectedDays= 5;
     const component = shallow(<TripSummary id={expectedId} image={expectedImageSrc} name={expectedName} tags={expectedTags} cost={expectedCost} days={expectedDays}/>);
+    expect(component.find('.tags span').exists()).toEqual(false);
+    expect(component.find('.tags').exists()).toEqual(false);
+  });
+  it('should not render div when props tags is false ', () => {
+    const expectedId = 'abc';
+    const expectedImageSrc = 'image.jpg';
+    const expectedName = 'image';
+    const expectedCost= '$500.00';
+    const expectedDays= 5;
+    const component = shallow(<TripSummary id={expectedId} image={expectedImageSrc} name={expectedName} cost={expectedCost} days={expectedDays}/>);
     expect(component.find('.tags span').exists()).toEqual(false);
     expect(component.find('.tags').exists()).toEqual(false);
   });
