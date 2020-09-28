@@ -7,29 +7,21 @@ import styles from './OrderOption.scss';
 
  
 class OrderOptionDate extends React.Component {
-  state = {
-    startDate: new Date(),
-  };
- 
-  handleChange = (date, setOptionValue) => {
-    event => setOptionValue(event.currentTarget.value),
-    this.setState({
-      startDate: date,
-    });
-  };
- 
+
   render() {
+    const {setOptionValue, currentValue} = this.props;
     return (
       <DatePicker
         className={styles.input}
-        selected={this.state.startDate}
-        onChange={this.handleChange}
+        selected={currentValue}
+        onChange={setOptionValue}
       />
     );
   }
 }
 OrderOptionDate.propTypes = {
   setOptionValue: PropTypes.func,
+  currentValue: PropTypes.string,
 };
 
 export default OrderOptionDate;
