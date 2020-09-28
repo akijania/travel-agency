@@ -1,6 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import OrderOption from './OrderOption';
+import DatePicker from 'react-datepicker';
 
 describe('Component OrderOption', () => {
     
@@ -125,14 +126,33 @@ for(let type in optionTypes){
         });
         break;
       }
+      case 'checkboxes': {
+        it('contains select and options', () => {
+          const div = renderedSubcomponent.find('div');
+          expect(div.length).toBe(1);
+        
+          const inputs = div.find('input');
+          expect(inputs.length).toBe(mockProps.values.length);
+          expect(inputs.at(0).prop('value')).toBe(mockProps.values[0].id);
+          expect(inputs.at(1).prop('value')).toBe(mockProps.values[1].id);
+        
+        });
+        it('should run setOrderOption function on change', () => {
+          renderedSubcomponent.find('input').at(1).simulate('change',{currentTarget: {checked: true}} );
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: [mockProps.currentValue, testValue] });
+        });
+        break;
+      }
+
       case 'number': {
         /* tests for dropdown */
         it('contains select and options', () => {
-          const select = renderedSubcomponent.find('div');
-          expect(select.length).toBe(1);
+          const div = renderedSubcomponent.find('div');
+          expect(div.length).toBe(1);
         
-          const emptyOption = select.find('input').length;
-          expect(emptyOption).toBe(1);
+          const input = div.find('input').length;
+          expect(input).toBe(1);
         
         });
         it('should run setOrderOption function on change', () => {
@@ -146,15 +166,29 @@ for(let type in optionTypes){
       case 'text': {
         /* tests for dropdown */
         it('contains div and input', () => {
-          const select = renderedSubcomponent.find('div');
-          expect(select.length).toBe(1);
+          const div = renderedSubcomponent.find('div');
+          expect(div.length).toBe(1);
         
-          const emptyOption = select.find('input').length;
-          expect(emptyOption).toBe(1);
+          const input = div.find('input').length;
+          expect(input).toBe(1);
 
         });
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent.find('input').simulate('change', {currentTarget: {value: testValue}});
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
+        });
+        break;
+      }
+      case 'date': {
+        /* tests for dropdown */
+        it('contains Datepicker', () => {
+          const RenderedDatePicker = renderedSubcomponent.find(DatePicker);
+          expect(RenderedDatePicker.length).toBe(1);
+
+        });
+        it('should run setOrderOption function on change', () => {
+          renderedSubcomponent.find(DatePicker).simulate('change', testValue);
           expect(mockSetOrderOption).toBeCalledTimes(1);
           expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
         });
